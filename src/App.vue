@@ -4,7 +4,7 @@
       <h1>Quizzes</h1>
       <input type="text" placeholder="Search..."/>
     </header>
-    <div class="options-container">
+    <div class="cards-container">
       <div class="card">
         <img src="https://1.bp.blogspot.com/-yoc0Q9DXW-4/XldH2nVAJJI/AAAAAAAAAOs/jLVu-DP6MPUZQMagC_S-9Iz-bpst9CObQCLcBGAsYHQ/s1600/Maths.png" alt="">
         <div class="card-text">
@@ -41,7 +41,7 @@
     border-radius: 10px;
   }
 
-  .options-container{
+  .cards-container{
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
