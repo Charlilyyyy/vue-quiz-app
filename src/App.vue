@@ -2,19 +2,32 @@
   <div class="container">
     <header>
       <h1>Quizzes</h1>
-      <input type="text" placeholder="Search..."/>
+      <input v-model.trim="search" type="text" placeholder="Search..."/>
     </header>
     <div class="cards-container">
-      <div class="card">
-        <img src="https://1.bp.blogspot.com/-yoc0Q9DXW-4/XldH2nVAJJI/AAAAAAAAAOs/jLVu-DP6MPUZQMagC_S-9Iz-bpst9CObQCLcBGAsYHQ/s1600/Maths.png" alt="">
+      <div v-for="quiz in quizzes" :key="quiz.id" class="card">
+        <img :src="quiz.img" alt="">
         <div class="card-text">
-          <h2>Math</h2>
-          <p>15 Question</p>
+          <h2>{{ quiz.name }}</h2>
+          <p>{{ quiz.questions.length }} Question</p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import Quizzes from "./data/quizzes.json";
+import { ref,watch } from "vue";
+
+const quizzes = ref(Quizzes)
+const search = ref("")
+
+watch(search, () => {
+  quizzes.value = Quizzes.filter(quiz => quiz.name.toLowerCase().includes(search.value.toLowerCase()))
+})
+
+</script>
 
 <style scoped>
   .container{
@@ -23,8 +36,7 @@
   }
 
   header{
-    margin-bottom: 10px;
-    margin-top: 30px;
+    margin: 30px 0 10px 0;
     display: flex;
     align-items: center;
   }
@@ -54,15 +66,20 @@
     overflow: hidden;
     border-radius: 2%;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 35px;
-    margin-right: 20px;
+    margin: 0 20px 35px 0;
     cursor: pointer;
+    background-color: white;
   }
   
   .card img{
     width: 100%;
     height: 190px;
     margin: 0;
+  }
+
+  .card .card-text{
+    padding: 0 0 10px 10px;
+    color: black;
   }
 
   .card .card-text h2{
